@@ -1,4 +1,4 @@
-package com.learning.fun.CamelIntegration.Config;
+package com.learning.fun.CamelIntegration.config;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;

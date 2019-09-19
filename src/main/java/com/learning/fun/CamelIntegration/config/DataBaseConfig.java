@@ -1,4 +1,4 @@
-package com.learning.fun.CamelIntegration.Config;
+package com.learning.fun.CamelIntegration.config;
 
 import javax.sql.DataSource;
 
