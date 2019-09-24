@@ -1,4 +1,7 @@
-package com.learning.fun.CamelIntegration.config;
+package com.learning.fun.CamelIntegration.processor;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -17,24 +20,24 @@ public class MyGenericProcessor implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
+		String defaultBodyMap= exchange.getIn().getBody(String.class);
+		LinkedHashMap<String, String> modelObj= exchange.getIn().getBody(LinkedHashMap.class);
+		log.info("Received defaultBodyMap: "+defaultBodyMap);
 		
-		String json=exchange.getIn().getBody(String.class);
-		log.info("Received Json: "+json);
-		ProcessorModel modelObj= getModel(json);
 		log.info("modelObj: "+modelObj);
 		
-		Class<MyAbstractProcessor> myAbstractProcessorClass= (Class<MyAbstractProcessor>)Class.forName("com.learning.fun.CamelIntegration.config."+modelObj.getProcessorName());
+		Class<MyAbstractProcessor> myAbstractProcessorClass= (Class<MyAbstractProcessor>)Class.forName("com.learning.fun.CamelIntegration.processor."+modelObj.get("processorName"));
 		
 		MyAbstractProcessor myAbstractProcessor = myAbstractProcessorClass.getConstructor().newInstance();
 	
-		myAbstractProcessor.setPayloadString(modelObj.getPayload());
+		myAbstractProcessor.setPayloadString(modelObj.get("payload"));
 		
 		myAbstractProcessor.execute();
 
 	}
 
 
-	private ProcessorModel getModel(String json) {
+	/*private ProcessorModel getModel(String json) {
 		String [] splitted=json.split("=");
 		ProcessorModel modelObj = new ProcessorModel();
 		
@@ -45,7 +48,7 @@ public class MyGenericProcessor implements Processor {
 		String payload=splitted[3].substring(0, lastIndex);
 		modelObj.setPayload(payload);
 		return modelObj;
-	}
+	}*/
 	
 	
 

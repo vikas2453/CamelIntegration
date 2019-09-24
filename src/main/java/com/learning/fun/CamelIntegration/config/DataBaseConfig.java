@@ -2,11 +2,12 @@ package com.learning.fun.CamelIntegration.config;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class DataBaseConfig {
@@ -39,6 +40,14 @@ public class DataBaseConfig {
 	public DataSource createDataSource() {
 		DataSource dataSource = DataSourceBuilder.create().build();
 		return dataSource;
+	}
+	
+	@Bean
+	
+	@Autowired
+	public JdbcTemplate createjdbcTemlate( DataSource ds) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
+		return jdbcTemplate;
 	}
 
 }

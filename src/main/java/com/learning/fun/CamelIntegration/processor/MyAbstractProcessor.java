@@ -1,4 +1,4 @@
-package com.learning.fun.CamelIntegration.config;
+package com.learning.fun.CamelIntegration.processor;
 
 import lombok.Data;
 

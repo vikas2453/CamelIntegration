@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProcessorModel {
 	
-	private int id;
+	private String id;
 	
 	private String processorName;
 	

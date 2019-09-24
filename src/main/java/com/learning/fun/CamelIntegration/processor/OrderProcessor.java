@@ -1,4 +1,4 @@
-package com.learning.fun.CamelIntegration.config;
+package com.learning.fun.CamelIntegration.processor;
 
 import com.google.gson.Gson;
 import com.learning.fun.CamelIntegration.model.OrderPayload;
@@ -21,7 +21,7 @@ public class OrderProcessor extends MyAbstractProcessor {
 		payload=gson.fromJson(getPayloadString(), OrderPayload.class);
 		
 		
-		log.info(" is being executed with customer value as "+payload );
+		log.info(" is being executed with customer value as "+gson.toJson(payload) );
 
 	}
 
